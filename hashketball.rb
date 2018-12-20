@@ -120,15 +120,19 @@ longest = ""
 longest
 end
 
-def long_name_steals_a_ton?
-  moststeals={name: nil, steals: 0}
-  game_hash.each do |key, data|
-    data[:players].each do |name, stats|
-       if stats[:steals] > moststeals[:steals]
-         moststeals[:name] = name
-         moststeals[:steals] = stats[:steals]
-       end
-    end
+def most_steals
+moststeals={name: nil, steals: 0}
+game_hash.each do |key, data|
+  data[:players].each do |name, stats|
+     if stats[:steals] > moststeals[:steals]
+       moststeals[:name] = name
+       moststeals[:steals] = stats[:steals]
+     end
   end
-  moststeals[:name] == player_with_longest_name
+end
+moststeals[:name]
+end
+
+def long_name_steals_a_ton?
+  most_steals == player_with_longest_name
 end
