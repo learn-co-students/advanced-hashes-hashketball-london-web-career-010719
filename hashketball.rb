@@ -50,9 +50,7 @@ def team_colors(teamname)
 end
 
 def team_names
-  game_hash.collect do |key, data|
-    data[:team_name]
-  end
+  game_hash.collect {|key, data| data[:team_name]}
 end
 
 def player_numbers(teamname)
@@ -69,9 +67,7 @@ end
 
 def player_stats(player)
   game_hash.each do |key, data|
-    data[:players].each do |name, stats|
-      return stats if name == player
-    end
+    data[:players].each {|name, stats| return stats if name == player}
   end
 end
 
@@ -87,4 +83,54 @@ def big_shoe_rebounds
   end
 
   return player_stats(largest[:name])[:rebounds]
+end
+
+def most_points_scored
+  current={:name => nil, :points => 0}
+  game_hash.each do |key, data|
+    data[:players].each do |name, stats|
+       if stats[:points] > current[:points]
+         current[:name] = name
+         current[:points] = stats[:points]
+       end
+    end
+  end
+  current[:name]
+end
+
+def winning_team
+winner = {team_name: nil, points:0}
+  game_hash.each do |key, data|
+    total = 0
+    data[:players].each do |player, stats|
+      total += player_stats(player)[:points]
+    end
+    if total > winner[:points]
+      winner[:team_name] = data[:team_name]
+      winner[:points] = total
+    end
+  end
+  winner[:team_name]
+end
+
+def player_with_longest_name
+longest = ""
+  game_hash.each do |key, data|
+    data[:players].keys.each {|player|
+      longest = player if player.length > longest.length}
+  end
+longest
+end
+
+def long_name_steals_a_ton?
+  moststeals={name: nil, steals: 0}
+  game_hash.each do |key, data|
+    data[:players].each do |name, stats|
+       if stats[:steals] > moststeals[:steals]
+         moststeals[:name] = name
+         moststeals[:steals] = stats[:steals]
+       end
+    end
+  end
+  moststeals[:name] == player_with_longest_name
 end
