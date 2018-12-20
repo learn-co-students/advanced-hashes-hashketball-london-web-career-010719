@@ -57,9 +57,7 @@ def player_numbers(teamname)
 newarray=[]
   game_hash.each do |key, data|
       if data[:team_name] == teamname
-        data[:players].each do |name, stats|
-        newarray << stats[:number]
-      end
+        data[:players].each {|name, stats| newarray << stats[:number]}
       end
   end
   newarray
