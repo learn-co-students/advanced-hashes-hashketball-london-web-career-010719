@@ -101,7 +101,7 @@ winner = {team_name: nil, points:0}
   game_hash.each do |key, data|
     total = 0
     data[:players].each do |player, stats|
-      total += player_stats(player)[:points]
+      total += num_points_scored(player)
     end
     if total > winner[:points]
       winner[:team_name] = data[:team_name]
