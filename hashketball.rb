@@ -294,6 +294,7 @@ def big_shoe_rebounds
 end
 
 
+
 def comparison_hash
   comparison_hash = {}
   game_hash.each do |location, team_data|
@@ -312,3 +313,41 @@ def comparison_hash
   end
   comparison_hash
 end
+
+def most_points_scored
+  holder_key = "key"
+  holder_value = 0
+  answer = {holder_key => holder_value}
+  holder_value = answer[holder_key]
+  comparison_hash_2.each do |key,value|
+
+    if value >= holder_value
+      holder_value = value
+      holder_key = key
+    end
+  end
+  player_name = holder_key
+  player_name
+end
+
+def comparison_hash_2
+  comparison_hash_2 = {}
+  game_hash.each do |location, team_data|
+    team_data.each do |key, team_attributes|
+      if key == :players
+        team_attributes.each do |players, data|
+          data.each do |data, value|
+            if data == :points
+              points_scored = value
+              comparison_hash_2[players] = points_scored
+
+            end
+          end
+        end
+      end
+    end
+  end
+  comparison_hash_2
+end
+
+puts most_points_scored
