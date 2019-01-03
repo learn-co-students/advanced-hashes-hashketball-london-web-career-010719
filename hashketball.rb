@@ -217,16 +217,11 @@ end
 
 def helper
 new_array = []
-game_hash.each do |team_home_or_away, team_info|
-  team_info.each do |team_info, statistics|
-    statistics[:players].each do |name, stats|
-      new_array.push(stats)
-      end
-    end
+game_hash.each do |home_or_away, team_info|
+  team_info[:players].each do |name, stats|
+    new_array.push(stats)
   end
-new_array
-binding.pry
 end
-
+end
 
 helper()
