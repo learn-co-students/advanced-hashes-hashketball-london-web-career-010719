@@ -221,7 +221,7 @@ game_hash.each do |team_home_or_away, team_info|
   team_info.each do |team_info, statistics|
     statistics.each do |player, player_stats|
       new_array.push(player_stats)
-  end    
+  end
   end
 end
 new_array
