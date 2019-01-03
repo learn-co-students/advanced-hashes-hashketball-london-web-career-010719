@@ -1,3 +1,5 @@
+require 'pry'
+
 def game_hash
   game_hash = {
     :home => {
@@ -220,6 +222,8 @@ game_hash.each do |team_home_or_away, team_info|
     new_array.push(statistics)
   end
 end
-
+new_array
+binding.pry
+end
 
 
