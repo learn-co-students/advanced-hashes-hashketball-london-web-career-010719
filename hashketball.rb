@@ -221,10 +221,9 @@ game_hash.each do |team_home_or_away, team_info|
   team_info.each do |team_info, statistics|
     statistics[:players].each do |name, stats|
       new_array.push(stats)
+      end
+    end
   end
-end
-  end
-end
 new_array
 binding.pry
 end
