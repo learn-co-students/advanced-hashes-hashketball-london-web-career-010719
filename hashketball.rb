@@ -218,7 +218,6 @@ game_hash.each do |home_or_away, team_info|
   end
 end
 new_array
-binding.pry
 end
 
 helper()
