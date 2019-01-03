@@ -222,6 +222,8 @@ game_hash.each do |home_or_away, team_info|
     new_array.push(stats)
   end
 end
+new_array
+binding.pry
 end
 
 helper()
