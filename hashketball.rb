@@ -204,7 +204,8 @@ helper.each do |player_stats|
     biggest_shoe = player_stats[:shoe]
     biggest_shoe_rebounds = player_stats[:rebounds]
   end
-end    
+end
+biggest_shoe_rebounds
 end
 
 
