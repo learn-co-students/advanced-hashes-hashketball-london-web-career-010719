@@ -219,8 +219,8 @@ def helper
 new_array = []
 game_hash.each do |team_home_or_away, team_info|
   team_info.each do |team_info, statistics|
-    statistics.each do |player, player_stats|
-      new_array.push(player_stats)
+    statistics[:players].each do |name, stats|
+      new_array.push(stats)
   end
   end
 end
