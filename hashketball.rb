@@ -222,6 +222,7 @@ game_hash.each do |team_home_or_away, team_info|
     statistics[:players].each do |name, stats|
       new_array.push(stats)
   end
+end
   end
 end
 new_array
