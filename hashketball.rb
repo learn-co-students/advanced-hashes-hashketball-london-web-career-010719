@@ -102,23 +102,70 @@ def player_stats(player_name)
   end
 end
 
+#Method to create an array with hashes for player info
+def all_players
+  all_players = []
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_name, player_data|
+      player_data[:name] = player_name
+      all_players << player_data
+    end
+  end
+  all_players
+end
+
 def big_shoe_rebounds
-  biggest_shoe_name = ""
-  biggest_shoe_size = 0
-  #first we find the biggest shoe size by iterating through the players and 
+  sorted_by_shoes = all_players.sort_by { |player|  player[:shoe] }
+  sorted_by_shoes.last[:rebounds]
+end
+
+def most_points_scored
+  sorted_by_points = all_players.sort_by { |player| player[:points] }
+  sorted_by_points.last[:name]
+end
+
+def winning_team
+  home_score = 0
+  away_score = 0
+  game_hash[:home][:players].each do |key, value|
+    home_score += value[:points]
+  end
+  game_hash[:away][:players].each do |key, value|
+    away_score += value[:points]
+  end
+
+  if home_score > away_score
+    return game_hash[:home][:team_name]
+  elsif home_score < away_score
+    return game_hash[:home][:team_name]
+  else
+    return "draw"
+  end
+end
+
+def num_points_scored(player_name)
   game_hash.each do |location, team_data|
     team_data.each do |key, value|
       if key == :players
-        value.each do |player, player_stats|
-          if player_stats[:shoe] > biggest_shoe_size
-            biggest_shoe_size = player_stats[:shoe]
-            biggest_shoe_name = player
-          end
+        player_data = value[player_name]
+        if player_data != nil
+          return player_data[:points]
         end
       end
     end
   end
-  player_stats(biggest_shoe_name)[:rebounds]
 end
 
+def player_with_longest_name
+  sorted_by_name = all_players.sort_by { |player| player[:name].length }
+  sorted_by_name.last[:name]
+end
 
+def most_steals
+  sorted_by_steals = all_players.sort_by { |player| player[:steals] }
+  sorted_by_steals.last[:name]
+end
+
+def long_name_steals_a_ton?
+  most_steals == player_with_longest_name
+end
